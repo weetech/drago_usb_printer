@@ -113,11 +113,12 @@ class DragoUsbPrinterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     result.success(true)
   }
 
-  private fun write(bytes: ByteArray?, result: Result) {
-    bytes?.let { adapter!!.write(it) }
-    result.success(true)
+ private fun write(bytes: ByteArray?, result: Result) {
+    var isPrintDone : Boolean?
+    isPrintDone = true;
+    bytes?.let { isPrintDone = adapter!!.write(it) }
+    result.success(isPrintDone)
   }
-
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
   }
